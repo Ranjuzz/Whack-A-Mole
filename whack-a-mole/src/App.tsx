@@ -7,19 +7,22 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [level, setLevel] = useState('Easy')
   const [holes, setHoles]  = useState(Array(25).fill(false));
   const [time, setTime] = useState(1000);
   const [timer, setTimer] = useState(15);
   const [isPlaying, setIsPlaying] = useState(false);
 
-
   const easy = () => {
+    setLevel('Easy');
     setTime(1100);
   }
   const medium = () => {
+    setLevel('Medium');
     setTime(900);
   }
   const hard = () => {
+    setLevel('Hard');
     setTime(700);
   }
 
@@ -29,7 +32,7 @@ function App() {
     if(isPlaying) {
       timer = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * holes.length);
-      
+
       setHoles(() => {
         const newHoles = Array(25).fill(false);
         newHoles[randomIndex] = true;
@@ -63,7 +66,6 @@ function App() {
       setCount((count) => count+1);
       setHoles(holes.fill(false));
     }
-
   }
 
   const start = () => {
@@ -78,6 +80,7 @@ function App() {
     setIsPlaying(false);
     setHoles(Array(25).fill(false))
   }
+
   
   return (
     <div className='game-area'>
@@ -92,11 +95,11 @@ function App() {
           : <button onClick={start}>Start</button>
           }
         <h3>
-          Difficulty:
+          Difficulty: {level}
         </h3>
-        <button onClick={easy}>Easy</button>
-        <button onClick={medium}>Medium</button>
-        <button onClick={hard}>Hard</button>
+        <button onClick={easy} > Easy </button>
+        <button onClick={medium} > Medium </button>
+        <button onClick={hard} > Hard   </button>
         <h3>
           Time Left: {timer}
         </h3>
